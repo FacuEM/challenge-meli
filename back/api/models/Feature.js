@@ -14,7 +14,7 @@ Feature.init(
       type: DataTypes.STRING,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     score: {
       type: DataTypes.NUMBER,

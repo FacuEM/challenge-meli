@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, useHistory, useParams} from 'react-router-dom';
 import {useInput} from '../hooks/input';
 import {useSelector, useDispatch} from 'react-redux';
-import {login} from '../redux/actions/auth'
+import {addBug} from '../redux/actions/bugs'
 // Material UI
-import {Avatar, Button, CssBaseline, TextField,  Grid, Typography, Container, LinearProgress} from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Button, CssBaseline, TextField, Typography, Container, LinearProgress} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -15,10 +14,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', 
@@ -32,12 +27,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Login = () => {
+const defaultImg = "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
 
-  const {value: email, bind: bindEmail, reset: resetEmail} = useInput('');
-  const {value: password, bind: bindPassword, reset: resetPassword} = useInput('');
+const BugForm = () => {
+  const {id} = useParams();
+  const {value: title, bind: bindTitle, reset: resetTitle} = useInput('');
+  const {value: image, bind: bindImage, reset: resetImage} = useInput(defaultImg);
+  const {value: description, bind: bindDescription, reset: resetDescription} = useInput('');
+
   const [isLoading, setIsLoading] = useState(false);
-  const isLogged = useSelector((state) => state.auth.logged)
   const classes = useStyles();
   
   const dispatch = useDispatch();
@@ -46,25 +44,22 @@ const Login = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
-    dispatch(login({email, password})).then(() => {
-      if(isLogged){
+    dispatch(addBug(id, {title, image, description})).then(() => {
         history.push('/');
         setIsLoading(false);
-        resetEmail();
-        resetPassword();
-      }
-    })
-  }
+        resetTitle();
+        resetImage();
+        resetDescription();
+      })
+    }
+  
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5">
-          Sign In
+          Add new bug
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <TextField
@@ -72,25 +67,35 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="title"
+            type="text"
+            label="Title"
+            name="title"
+            autoComplete="title"
             autoFocus
-            {...bindEmail}
+            {...bindTitle}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            {...bindPassword}
+            name="image"
+            label="image"
+            type="text"
+            id="image"
+            autoComplete="image"
+            {...bindImage}
           />
+           <TextField
+            margin="normal"
+          id="outlined-multiline-static"
+          label="Description"
+          fullWidth
+          multiline
+          rows={6}
+          variant="outlined"
+          {...bindDescription}
+        />
           <Button
             type="submit"
             fullWidth
@@ -98,20 +103,14 @@ const Login = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Submit
           </Button>
           {isLoading ?  <LinearProgress /> : null}
-          <Grid container>
-            <Grid item>
-              <Link to='/register' className={classes.linkDeco}>
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+         
         </form>
       </div>
     </Container>
   );
 }
 
-export default Login
+export default BugForm

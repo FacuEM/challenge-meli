@@ -5,6 +5,12 @@ const toolsController = {
   fetchTools(req, res) {
     Tool.findAll().then((tools) => res.send(tools));
   },
+  //fetch single tool
+  fetchSingleTool(req, res) {
+    Tool.findOne({ where: { id: req.params.id } }).then((tool) =>
+      res.send(tool)
+    );
+  },
   //add new tool
   addTool(req, res) {
     Tool.create(req.body).then((tool) => res.send(tool));
@@ -18,6 +24,14 @@ const toolsController = {
       })
       .catch((err) => console.log(err));
   },
+  //fetch features from a tool
+  fetchFeatures(req, res) {
+    Feature.findAll({
+      where: {
+        ToolId: req.params.id,
+      },
+    }).then((features) => res.send(features));
+  },
   //add a bug to a tool
   addBug(req, res) {
     Bug.create(req.body)
@@ -26,6 +40,14 @@ const toolsController = {
         res.send(bug);
       })
       .catch((err) => console.log(err));
+  },
+  //fetch bugs from a tool
+  fetchBugs(req, res) {
+    Bug.findAll({
+      where: {
+        ToolId: req.params.id,
+      },
+    }).then((bugs) => res.send(bugs));
   },
 };
 

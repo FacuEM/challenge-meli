@@ -1,13 +1,13 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 const { Provider } = require("react-redux");
-import Main from "./components/Main";
 
+import Routes from "./components/Routes";
 import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Main />
+    <Routes />
   </Provider>,
   document.getElementById("app")
 );
