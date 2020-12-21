@@ -9,7 +9,9 @@ import Register from './Register';
 import ToolForm from './ToolForm';
 import Tool from './Tool';
 import FeatureForm from './FeatureForm';
-import BugForm from './BugForm'
+import BugForm from './BugForm';
+import Feature from './Feature';
+import Bug from './Bug';
 
 const Routes = () => {
 
@@ -30,6 +32,9 @@ const Routes = () => {
 
               <Route path="/addTool" component={ToolForm} />
               <Route path='/tool/:id' component={Tool} />
+
+              <Route path='/feature/:id' component={Feature} />
+              <Route path='/bug/:id' component={Bug}/>
 
               <Route path='/addFeature/:id' component={FeatureForm} />
               <Route path='/addBug/:id' component={BugForm} />

@@ -6,31 +6,8 @@ import {login} from '../redux/actions/auth'
 // Material UI
 import {Avatar, Button, CssBaseline, TextField,  Grid, Typography, Container, LinearProgress} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  linkDeco : {
-    textDecoration: "none"
-  }
-}));
+// Styles
+import {FormStyles} from '../assets/FormStyles'
 
 const Login = () => {
 
@@ -38,8 +15,7 @@ const Login = () => {
   const {value: password, bind: bindPassword, reset: resetPassword} = useInput('');
   const [isLoading, setIsLoading] = useState(false);
   const isLogged = useSelector((state) => state.auth.logged)
-  const classes = useStyles();
-  
+  const classes = FormStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 

@@ -4,24 +4,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Navbar from './Navbar';
 // Material UI
-import { makeStyles } from '@material-ui/core/styles';
 import {Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Grid} from '@material-ui/core';
+// Styles
+import {MainStyles} from '../assets/ToolStyles'
 
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-    margin: 'auto 10px auto 10px'
-  },
-  linkDeco : {
-    textDecoration: "none"
-  }
-});
+
 
 
 const Main = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const classes = MainStyles();
   const tools =  useSelector(state => state.tools.tools)
 
   useEffect(() =>{ dispatch(fetchTools())}, [])

@@ -4,47 +4,33 @@ import {fetchSingleTool} from '../redux/actions/tools';
 import {Link, useParams} from 'react-router-dom'
 import { fetchFeatures } from '../redux/actions/features';
 import { fetchBugs } from '../redux/actions/bugs';
+import Navbar from './Navbar';
 // Material UI
-import {Card, CardContent, CardMedia, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {Card, CardContent, CardMedia, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+// Styles
+import {ToolStyles} from '../assets/ToolStyles';
+// Icons
+import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined';
+import AddToPhotosOutlinedIcon from '@material-ui/icons/AddToPhotosOutlined';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 151,
-  },
-  table: {
-    minWidth: 650,
-  },
-  thead: {
-    backgroundColor: 'rgb(32,35,42)',
-  },
-  letters: {
-    color: 'white'
-  }
-}));
+
 
 const Tool = () => {
   const dispatch=useDispatch();
   const {id} = useParams();
+  const classes = ToolStyles();
+  const theme = useTheme();
+  // Store
   const tool = useSelector(state => state.tools.tool)
   const isLogged = useSelector(state => state.auth.logged)
   const features = useSelector(state => state.features.features)
   const bugs = useSelector(state => state.bugs.bugs)
-
-  const classes = useStyles();
-  const theme = useTheme();
+ 
+  
 
   useEffect(() => {
     dispatch(fetchSingleTool(id))
@@ -52,8 +38,10 @@ const Tool = () => {
     dispatch(fetchBugs(id))
   },[])
 
-  return (
  
+  return (
+    <>
+    <Navbar />
     <Card className={classes.root}>
        <CardMedia
       className={classes.cover}
@@ -75,7 +63,7 @@ const Tool = () => {
             <TableCell className={classes.letters} align="left">Title</TableCell>
             <TableCell className={classes.letters} align="left">Image</TableCell>
             <TableCell className={classes.letters} align="left">Description</TableCell>
-            <TableCell className={classes.letters} align="left">Priority</TableCell>
+            <TableCell className={classes.letters} align="left">Detailed Information</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -83,9 +71,9 @@ const Tool = () => {
             <TableRow key={f.id}>
               
               <TableCell align="left">{f.title}</TableCell>
-              <TableCell align="left">{f.image}</TableCell>
+              <TableCell align="left">Image</TableCell>
               <TableCell align="left">{f.description}</TableCell>
-              <TableCell align="left">estrellitas</TableCell>
+              <TableCell align="left"><Link to={`/feature/${f.id}`}> More Details </Link></TableCell>
              
             </TableRow>
           ))}
@@ -102,7 +90,7 @@ const Tool = () => {
             <TableCell className={classes.letters} align="left">Title</TableCell>
             <TableCell className={classes.letters} align="left">Image</TableCell>
             <TableCell className={classes.letters} align="left">Description</TableCell>
-            <TableCell className={classes.letters} align="left">Priority</TableCell>
+            <TableCell className={classes.letters} align="left">Detailed Information</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -110,23 +98,50 @@ const Tool = () => {
             <TableRow key={b.id}>
               
               <TableCell align="left">{b.title}</TableCell>
-              <TableCell align="left">{b.image}</TableCell>
+              <TableCell align="left">Image</TableCell>
               <TableCell align="left">{b.description}</TableCell>
-              <TableCell align="left">estrellitas</TableCell>
+              <TableCell align="left"><Link to={`/bug/${b.id}`}> More Details </Link></TableCell>
              
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-        
+    <br/>
+    { isLogged.email && <> <Link to={`/addBug/${id}`} className={classes.linkDeco} >
+    <Button
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        startIcon={<BugReportOutlinedIcon />}
+      >
+        Add bug
+      </Button>
+      </Link>
+      <Link to={`/addFeature/${id}`} className={classes.linkDeco} >
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={<AddToPhotosOutlinedIcon />}
+      >
+        Add feature
+      </Button>
+      </Link></>}
+      <Link to='/' className={classes.linkDeco} >
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<HomeOutlinedIcon />}
+      >
+        Go Back
+      </Button>
+      </Link>
       </CardContent>
-      
-      
     </div>
-  
   </Card>
- 
+ </>
 
   )
 }
@@ -134,14 +149,3 @@ const Tool = () => {
 export default Tool
 
 
-/*
-<div>
-      {tool.title && <h1>{tool.title}</h1>}
-      <h1>Features:</h1>
-      {features && features.map((f) => <li>{f.title}</li>) }
-      <Link to={`/addFeature/${id}`} ><button>Add new feature</button></Link>
-      <h1>Bugs:</h1>
-      {bugs && bugs.map((b) => <li>{b.title}</li>) }
-      <Link to={`/addBug/${id}`} ><button>Add new bug</button></Link>
-    </div>
-    */

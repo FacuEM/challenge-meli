@@ -32,6 +32,14 @@ const toolsController = {
       },
     }).then((features) => res.send(features));
   },
+  //fetch single feature from a tool
+  fetchSingleFeature(req, res) {
+    Feature.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then((feature) => res.send(feature));
+  },
   //add a bug to a tool
   addBug(req, res) {
     Bug.create(req.body)
@@ -48,6 +56,14 @@ const toolsController = {
         ToolId: req.params.id,
       },
     }).then((bugs) => res.send(bugs));
+  },
+  //fetch single bug from a tool
+  fetchSingleBug(req, res) {
+    Bug.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then((bug) => res.send(bug));
   },
 };
 

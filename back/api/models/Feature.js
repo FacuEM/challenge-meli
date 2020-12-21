@@ -16,9 +16,6 @@ Feature.init(
     description: {
       type: DataTypes.TEXT,
     },
-    score: {
-      type: DataTypes.NUMBER,
-    },
   },
   {
     sequelize: db,

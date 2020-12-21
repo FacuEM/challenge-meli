@@ -5,27 +5,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addTool} from '../redux/actions/tools'
 // Material UI
 import { Button, CssBaseline, TextField, Typography, Container, LinearProgress} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+// Styles
+import {FormStyles} from '../assets/FormStyles'
 
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  linkDeco : {
-    textDecoration: "none"
-  }
-}));
 
 const defaultImg = "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
 
@@ -34,8 +17,8 @@ const ToolForm = () => {
   const {value: title, bind: bindTitle, reset: resetTitle} = useInput('');
   const {value: image, bind: bindImage, reset: resetImage} = useInput(defaultImg);
   const [isLoading, setIsLoading] = useState(false);
-  const classes = useStyles();
   
+  const classes = FormStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 

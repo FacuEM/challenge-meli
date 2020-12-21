@@ -4,39 +4,18 @@ import {useDispatch} from 'react-redux';
 import {register} from '../redux/actions/auth';
 import {useHistory, Link} from 'react-router-dom';
 // Material UI
-import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Grid, Typography, Container} from '@material-ui/core';
+import {Avatar, Button, CssBaseline, TextField, Grid, Typography, Container} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+// Styles
+import {FormStyles} from '../assets/FormStyles';
 
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  linkDeco : {
-    textDecoration: "none"
-  }
-}));
 
 const Register = () => {
   const { value: email, bind: bindEmail, reset: resetEmail} = useInput('');
   const { value: password, bind: bindPassword, reset: resetPassword} = useInput('');
-  const classes = useStyles();
-
+  
+  const classes = FormStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 
