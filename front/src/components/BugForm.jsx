@@ -1,39 +1,49 @@
 import React, {useState} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import { useHistory, useParams} from 'react-router-dom';
 import {useInput} from '../hooks/input';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {addBug} from '../redux/actions/bugs'
 // Material UI
 import { Button, CssBaseline, TextField, Typography, Container, LinearProgress} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 // Styles
 import {FormStyles} from '../assets/FormStyles'
-
-
-
 
 const defaultImg = "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
 
 const BugForm = () => {
   const {id} = useParams();
-  const {value: title, bind: bindTitle, reset: resetTitle} = useInput('');
-  const {value: image, bind: bindImage, reset: resetImage} = useInput(defaultImg);
-  const {value: description, bind: bindDescription, reset: resetDescription} = useInput('');
-
-  const [isLoading, setIsLoading] = useState(false);
   const classes = FormStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  // Local State
+  const {value: title, bind: bindTitle, reset: resetTitle} = useInput('');
+  const {value: image, bind: bindImage, reset: resetImage} = useInput(defaultImg);
+  const {value: description, bind: bindDescription, reset: resetDescription} = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  // Store
+  const tool = useSelector(state => state.tools.tool)
 
   const handleSubmit = (evt) => {
+    let uniqueBug = tool.Bugs && tool.Bugs.filter(b => b.title === title)
     evt.preventDefault();
-    setIsLoading(true);
+    if(uniqueBug.length > 0) {
+      setError(true);
+      resetTitle();
+      resetImage();
+      resetDescription();
+      setIsLoading(true);
+      setTimeout(() => {setError(false);  setIsLoading(false)}, 3000); 
+     }
+    else {
     dispatch(addBug(id, {title, image, description})).then(() => {
         setIsLoading(false);
         resetTitle();
         resetImage();
         resetDescription();
         history.goBack()
-      })
+      }).catch(() => {setError(true); setIsLoading(false)})}
     }
   
 
@@ -88,8 +98,17 @@ const BugForm = () => {
           >
             Submit
           </Button>
-          {isLoading ?  <LinearProgress /> : null}
-         
+          <Button
+            fullWidth
+            variant="contained"
+            color="default"
+            className={classes.back}
+            onClick={() => history.goBack()}
+          >
+           Go Back
+          </Button>
+          {isLoading ?  <><LinearProgress /><br/></> : null}
+          {error &&  <Alert severity="error">This bug already exists</Alert> }
         </form>
       </div>
     </Container>

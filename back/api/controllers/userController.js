@@ -7,7 +7,7 @@ const userController = {
       .then((user) => {
         res.status(201).send(user);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => res.status(401).send(err));
   },
   //login
   login(req, res) {

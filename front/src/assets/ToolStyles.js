@@ -12,7 +12,7 @@ export const ToolStyles = makeStyles((theme) => ({
     flex: "1 0 auto",
   },
   cover: {
-    width: 151,
+    width: "35%",
   },
   table: {
     minWidth: 650,

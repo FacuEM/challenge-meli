@@ -18,6 +18,9 @@ export const FormStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  back: {
+    margin: theme.spacing(0, 0, 2),
+  },
   linkDeco: {
     textDecoration: "none",
   },

@@ -5,8 +5,10 @@ import {Link, useParams} from 'react-router-dom'
 import { fetchFeatures } from '../redux/actions/features';
 import { fetchBugs } from '../redux/actions/bugs';
 import Navbar from './Navbar';
+import FeatureCell from './FeatureCell';
+import BugCell from './BugCell';
 // Material UI
-import {Card, CardContent, CardMedia, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core';
+import {Card, CardContent, CardMedia, Typography, Table,  TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 // Styles
 import {ToolStyles} from '../assets/ToolStyles';
@@ -14,10 +16,6 @@ import {ToolStyles} from '../assets/ToolStyles';
 import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined';
 import AddToPhotosOutlinedIcon from '@material-ui/icons/AddToPhotosOutlined';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-
-
-
-
 
 const Tool = () => {
   const dispatch=useDispatch();
@@ -27,11 +25,7 @@ const Tool = () => {
   // Store
   const tool = useSelector(state => state.tools.tool)
   const isLogged = useSelector(state => state.auth.logged)
-  const features = useSelector(state => state.features.features)
-  const bugs = useSelector(state => state.bugs.bugs)
  
-  
-
   useEffect(() => {
     dispatch(fetchSingleTool(id))
     dispatch(fetchFeatures(id))
@@ -46,7 +40,7 @@ const Tool = () => {
        <CardMedia
       className={classes.cover}
       image={tool.image}
-      title="Feature image"
+      title="Tool image"
       component='img'
     />
     <div className={classes.details}>
@@ -61,23 +55,16 @@ const Tool = () => {
           <TableRow>
 
             <TableCell className={classes.letters} align="left">Title</TableCell>
-            <TableCell className={classes.letters} align="left">Image</TableCell>
-            <TableCell className={classes.letters} align="left">Description</TableCell>
+            <TableCell className={classes.letters} align="left">Priority</TableCell>
+            <TableCell className={classes.letters} align="left">Requested by</TableCell>
+            <TableCell className={classes.letters} align="left">Status</TableCell>
             <TableCell className={classes.letters} align="left">Detailed Information</TableCell>
+            {tool.UserId === isLogged.id && <TableCell className={classes.letters} align="left">Activate</TableCell>}
           </TableRow>
         </TableHead>
-        <TableBody>
-          {features && features.map((f) => (
-            <TableRow key={f.id}>
-              
-              <TableCell align="left">{f.title}</TableCell>
-              <TableCell align="left">Image</TableCell>
-              <TableCell align="left">{f.description}</TableCell>
-              <TableCell align="left"><Link to={`/feature/${f.id}`}> More Details </Link></TableCell>
-             
-            </TableRow>
-          ))}
-        </TableBody>
+
+       <FeatureCell  />
+
       </Table>
     </TableContainer>
     <br/>
@@ -88,23 +75,15 @@ const Tool = () => {
           <TableRow>
 
             <TableCell className={classes.letters} align="left">Title</TableCell>
-            <TableCell className={classes.letters} align="left">Image</TableCell>
-            <TableCell className={classes.letters} align="left">Description</TableCell>
+            <TableCell className={classes.letters} align="left">Priority</TableCell>
+            <TableCell className={classes.letters} align="left">Requested by</TableCell>
+            <TableCell className={classes.letters} align="left">Status</TableCell>
             <TableCell className={classes.letters} align="left">Detailed Information</TableCell>
+            {tool.UserId === isLogged.id && <TableCell className={classes.letters} align="left">Activate</TableCell>}
           </TableRow>
         </TableHead>
-        <TableBody>
-          {bugs && bugs.map((b) => (
-            <TableRow key={b.id}>
-              
-              <TableCell align="left">{b.title}</TableCell>
-              <TableCell align="left">Image</TableCell>
-              <TableCell align="left">{b.description}</TableCell>
-              <TableCell align="left"><Link to={`/bug/${b.id}`}> More Details </Link></TableCell>
-             
-            </TableRow>
-          ))}
-        </TableBody>
+        <BugCell />
+      
       </Table>
     </TableContainer>
     <br/>

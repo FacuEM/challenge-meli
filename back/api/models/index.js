@@ -4,11 +4,24 @@ const Feature = require("./Feature");
 const Bug = require("./Bug");
 const Priority = require("./Priority");
 
-Bug.belongsTo(Tool);
+//Tool
+Tool.belongsTo(User);
+Tool.hasMany(Feature);
+Tool.hasMany(Bug);
+//Feature
 Feature.belongsTo(Tool);
+Feature.belongsTo(User);
+Feature.hasMany(Priority);
+//Bug
+Bug.belongsTo(Tool);
+Bug.belongsTo(User);
+Bug.hasMany(Priority);
+//Priority
 Priority.belongsTo(Feature);
 Priority.belongsTo(Bug);
-Feature.hasMany(Priority);
-Bug.hasMany(Priority);
+//User
+User.hasMany(Tool);
+User.hasMany(Bug);
+User.hasMany(Feature);
 
 module.exports = { User, Tool, Feature, Bug, Priority };

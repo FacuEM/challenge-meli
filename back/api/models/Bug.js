@@ -8,7 +8,6 @@ Bug.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     image: {
       type: DataTypes.STRING,
@@ -16,8 +15,13 @@ Bug.init(
     description: {
       type: DataTypes.STRING,
     },
-    score: {
-      type: DataTypes.NUMBER,
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

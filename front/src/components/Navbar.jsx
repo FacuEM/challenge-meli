@@ -11,7 +11,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = NavbarStyles();
-
+  // Store
   const isLogged = useSelector((state) => state.auth.logged);
  
   const handleLogout = () => {
@@ -19,8 +19,6 @@ const Navbar = () => {
     history.push('/')
   }
 
-
- 
   return (
     <React.Fragment>
       <CssBaseline />
@@ -80,6 +78,5 @@ const Navbar = () => {
     </React.Fragment>
   );
 }
-
 
 export default Navbar

@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import { useHistory, useParams} from 'react-router-dom';
 import {useInput} from '../hooks/input';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {addFeature} from '../redux/actions/features'
 // Material UI
 import { Button, CssBaseline, TextField, Typography, Container, LinearProgress} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 // Styles
 import {FormStyles} from '../assets/FormStyles'
 
@@ -12,29 +13,39 @@ const defaultImg = "https://images.unsplash.com/photo-1584824486509-112e4181ff6b
 
 const FeatureForm = () => {
   const {id} = useParams();
+  const classes = FormStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  // Local State
   const {value: title, bind: bindTitle, reset: resetTitle} = useInput('');
   const {value: image, bind: bindImage, reset: resetImage} = useInput(defaultImg);
   const {value: description, bind: bindDescription, reset: resetDescription} = useInput('');
-
   const [isLoading, setIsLoading] = useState(false);
-  const classes = FormStyles();
+  const [error, setError] = useState(false);
+  // Store
+  const tool = useSelector(state => state.tools.tool)
   
-  const dispatch = useDispatch();
-  const history = useHistory();
-
   const handleSubmit = (evt) => {
+    let uniqueFt = tool.Features && tool.Features.filter(f => f.title === title)
     evt.preventDefault();
-    setIsLoading(true);
+    if(uniqueFt.length > 0) {
+      setError(true);
+      resetTitle();
+      resetImage();
+      resetDescription();
+      setIsLoading(true);
+      setTimeout(() => {setError(false);  setIsLoading(false)}, 3000); 
+     }
+    else {
     dispatch(addFeature(id, {title, image, description})).then(() => {
         setIsLoading(false);
         resetTitle();
         resetImage();
         resetDescription();
         history.goBack()
-      })
+      }).catch(() => {setError(true); setIsLoading(false)})}
     }
   
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -86,8 +97,17 @@ const FeatureForm = () => {
           >
             Submit
           </Button>
-          {isLoading ?  <LinearProgress /> : null}
-         
+          <Button
+            fullWidth
+            variant="contained"
+            color="default"
+            className={classes.back}
+            onClick={() => history.goBack()}
+          >
+           Go Back
+          </Button>
+          {isLoading ?  <><LinearProgress /><br/></> : null}
+          {error &&  <Alert severity="error">This feature already exists</Alert> }
         </form>
       </div>
     </Container>

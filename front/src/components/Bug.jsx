@@ -9,8 +9,8 @@ import {Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typog
 import Rating from '@material-ui/lab/Rating';
 // Styles
 import {FeatureStyles} from '../assets/ExtraStyle'
-
-
+// Icons
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 
 const labels = {
   1: 'Low+',
@@ -20,27 +20,27 @@ const labels = {
   5: 'High+',
 };
 
-
 const defaultImg = "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
 
-const Feature = () => {
+const Bug = () => {
   const {id} = useParams();
-  const bug = useSelector((state) => state.bugs.bug)
-  const stars = useSelector((state) => state.priorities.starsBug)
-  const [value, setValue] = useState(0);
-  const [hover, setHover] = useState(-1);
-  const [sent, setSent] = useState(false)
-  
   const classes = FeatureStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  // Local State
+  const [value, setValue] = useState(0);
+  const [hover, setHover] = useState(-1);
+  const [sent, setSent] = useState(false)
+  // Store
+  const bug = useSelector((state) => state.bugs.bug)
+  const stars = useSelector((state) => state.priorities.starsBug)
+  const isLogged = useSelector((state) => state.auth.logged)
+ 
   useEffect(() => {
     dispatch(fetchSingleBug(id))
     dispatch(fetchStarsBugs(id))
   }, [])
   
-
   return (
     <Card>
     <CardActionArea>
@@ -55,17 +55,25 @@ const Feature = () => {
           {bug.title}
         </Typography>
         <Typography variant="body2" color="textPrimary" component="p">
+          Requested by: {bug.User && bug.User.name}
+        </Typography>
+        <Typography variant="body2" color="textPrimary" component="p">
           Description: {bug.description}
         </Typography>
         <Typography variant="body2" color="textPrimary" component="p">
           Current Priority: {priorityAvg(stars)}
         </Typography>
+        <Typography variant="body2" color="textPrimary" component="p">
+          Status: {bug.completed ? 'Completed' : 'Pending'}
+        </Typography>
       </CardContent>
     </CardActionArea>
     <CardActions>
-    <h4>Vote priority: </h4>
+    <Typography variant="body2" color="textPrimary" component="h2">
+       Vote Priority:
+     </Typography>
     <div className={classes.root}> 
-      <Rating
+    {isLogged.name ? <><Rating
         name="hover-feedback"
         value={value}
         precision={1}
@@ -73,24 +81,30 @@ const Feature = () => {
         onChange={(event, newValue) => {
           event.preventDefault()
           setValue(newValue);
-          dispatch(addPriorityBug(bug.id, newValue)).then(() => setSent(true))
+          dispatch(addPriorityBug(bug.id, {stars: newValue})).then(() => setSent(true))
         }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
       />
       {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
+      </>
+       : <Typography variant="body2" color="textPrimary" component="p">
+       You must be logged in 
+     </Typography>}
     </div>
-        <Button type="submit"
-            variant="contained"
-            color="primary"
-            onClick={() => history.goBack()}
-          >
-            Go Back
-          </Button>
+    <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<HomeOutlinedIcon />}
+        onClick={() => history.goBack()}
+      >
+        Go Back
+      </Button>
     </CardActions>
   </Card>
   );
 }
 
-export default Feature
+export default Bug

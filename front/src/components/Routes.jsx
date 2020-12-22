@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { fetchUser } from "../redux/actions/auth";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import ProtectedRoute from '../aux/protectedRoute';
 import Main from "./Main";
 import Login from './Login';
 import Register from './Register';
@@ -14,7 +15,6 @@ import Feature from './Feature';
 import Bug from './Bug';
 
 const Routes = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,16 +29,15 @@ const Routes = () => {
             <Switch>
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
-
-              <Route path="/addTool" component={ToolForm} />
+              
               <Route path='/tool/:id' component={Tool} />
-
               <Route path='/feature/:id' component={Feature} />
               <Route path='/bug/:id' component={Bug}/>
-
-              <Route path='/addFeature/:id' component={FeatureForm} />
-              <Route path='/addBug/:id' component={BugForm} />
-
+              
+              <ProtectedRoute exact path='/addTool' component={ToolForm} />
+              <ProtectedRoute exact path='/addFeature/:id' component={FeatureForm} />
+              <ProtectedRoute exact path='/addBug/:id' component={BugForm} />
+        
               <Route exact path="/" component={Main} />
 
               <Redirect from='/' to='/' />

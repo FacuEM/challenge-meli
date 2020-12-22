@@ -59,7 +59,6 @@ passport.deserializeUser(function (id, done) {
   User.findByPk(id).then((user) => done(null, user));
 });
 
-// Render static files
 app.use(express.static("public"));
 
 app.use("/api", API);

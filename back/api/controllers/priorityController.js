@@ -1,4 +1,4 @@
-const { Tool, Feature, Bug, Priority } = require("../models/index");
+const { Priority } = require("../models/index");
 
 const priorityController = {
   //add priority to feature

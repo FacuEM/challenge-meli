@@ -1,21 +1,17 @@
 {
-  "name": "omdb-back",
+  "name": "challenge-back",
   "version": "1.0.0",
-  "description": "api movie site",
+  "description": "challege-FacuEM",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atralice/omdb.git"
+    "url": "git+https://github.com/FacuEM/challenge-meli"
   },
   "author": "Plataforma 5",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/atralice/omdb/issues"
-  },
-  "homepage": "https://github.com/atralice/omdb#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "bluebird": "^3.5.3",

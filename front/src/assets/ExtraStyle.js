@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const FeatureStyles = makeStyles({
   media: {
-    height: 345,
+    height: 500,
   },
   root: {
     width: 200,

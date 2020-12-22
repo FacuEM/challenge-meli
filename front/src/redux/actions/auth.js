@@ -7,11 +7,11 @@ export const isLogged = (user) => {
     payload: user,
   };
 };
-// send data from register to the DB
-export const register = (data) => () => {
+
+export const register = (data) => (dispatch) => {
   return axios.post("/api/auth/register", data);
 };
-// send data from login to the DB and fill the reducer
+
 export const login = (data) => (dispatch) => {
   return axios
     .post("/api/auth/login", data)
@@ -23,7 +23,7 @@ export const fetchUser = () => (dispatch) => {
     .get("/api/auth/me")
     .then((response) => dispatch(isLogged(response.data)));
 };
-// logout the user and clean the reducer
+
 export const logout = () => (dispatch) => {
   return axios.post("/api/auth/logout").then(() => dispatch(isLogged({})));
 };

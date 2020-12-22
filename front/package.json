@@ -1,21 +1,17 @@
 {
-  "name": "omdb-front",
+  "name": "challenge-front",
   "version": "1.0.0",
-  "description": "movies info front end site",
+  "description": "challenge-FacuEM",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack -w"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atralice/omdb.git"
+    "url": "git+https://github.com/FacuEM/challenge-meli"
   },
-  "author": "plataforma 5",
+  "author": "FacuEM",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/atralice/omdb/issues"
-  },
-  "homepage": "https://github.com/atralice/omdb#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",

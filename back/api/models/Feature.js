@@ -8,13 +8,20 @@ Feature.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     image: {
       type: DataTypes.STRING,
     },
     description: {
       type: DataTypes.TEXT,
+    },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

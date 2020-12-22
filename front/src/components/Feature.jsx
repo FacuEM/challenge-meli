@@ -9,7 +9,8 @@ import {Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typog
 import Rating from '@material-ui/lab/Rating';
 // Style
 import {FeatureStyles} from '../assets/ExtraStyle'
-
+// Icons
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 
 
 const labels = {
@@ -25,21 +26,22 @@ const defaultImg = "https://images.unsplash.com/photo-1584824486509-112e4181ff6b
 
 const Feature = () => {
   const {id} = useParams();
-  const feature = useSelector((state) => state.features.feature)
-  const stars = useSelector((state) => state.priorities.starsFt)
-  const [value, setValue] = useState(0);
-  const [hover, setHover] = useState(-1);
-  const [sent, setSent] = useState(false)
-  
   const classes = FeatureStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  // Local State
+  const [value, setValue] = useState(0);
+  const [hover, setHover] = useState(-1);
+  const [sent, setSent] = useState(false)
+  // Store
+  const feature = useSelector((state) => state.features.feature)
+  const stars = useSelector((state) => state.priorities.starsFt)
+  const isLogged = useSelector((state) => state.auth.logged)
+  
   useEffect(() => {
     dispatch(fetchSingleFeature(id))
     dispatch(fetchStarsFt(id))
   }, [])
-  
 
   return (
     <Card>
@@ -55,18 +57,25 @@ const Feature = () => {
           {feature.title}
         </Typography>
         <Typography variant="body2" color="textPrimary" component="p">
+          Requested by: {feature.User && feature.User.name}
+        </Typography>
+        <Typography variant="body2" color="textPrimary" component="p">
           Description: {feature.description}
         </Typography>
         <Typography variant="body2" color="textPrimary" component="p">
           Current Priority: {priorityAvg(stars)}
         </Typography>
-       
+        <Typography variant="body2" color="textPrimary" component="p">
+          Status: {feature.completed ? 'Completed' : 'Pending'} 
+        </Typography>
       </CardContent>
     </CardActionArea>
     <CardActions>
-    <h4>Vote priority: </h4>
+    <Typography variant="body2" color="textPrimary" component="h2">
+       Vote Priority: 
+     </Typography>
     <div className={classes.root}> 
-      <Rating
+     {isLogged.name ? <><Rating
         name="hover-feedback"
         value={value}
         precision={1}
@@ -74,21 +83,27 @@ const Feature = () => {
         onChange={(event, newValue) => {
           event.preventDefault()
           setValue(newValue);
-          dispatch(addPriorityFt(feature.id, newValue)).then(() => setSent(true))
+          dispatch(addPriorityFt(feature.id, {stars: newValue})).then(() => setSent(true))
         }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
       />
       {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
+      </>
+       :  <Typography variant="body2" color="textPrimary" component="p">
+       You must be logged in 
+     </Typography>}
     </div>
-        <Button type="submit"
-            variant="contained"
-            color="primary"
-            onClick={() => history.goBack()}
-          >
-            Go Back
-          </Button>
+    <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<HomeOutlinedIcon />}
+        onClick={() => history.goBack()}
+      >
+        Go Back
+      </Button>
     </CardActions>
   </Card>
   );

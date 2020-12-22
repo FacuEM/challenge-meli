@@ -5,31 +5,37 @@ import {useSelector, useDispatch} from 'react-redux';
 import {login} from '../redux/actions/auth'
 // Material UI
 import {Avatar, Button, CssBaseline, TextField,  Grid, Typography, Container, LinearProgress} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // Styles
 import {FormStyles} from '../assets/FormStyles'
 
 const Login = () => {
-
-  const {value: email, bind: bindEmail, reset: resetEmail} = useInput('');
-  const {value: password, bind: bindPassword, reset: resetPassword} = useInput('');
-  const [isLoading, setIsLoading] = useState(false);
-  const isLogged = useSelector((state) => state.auth.logged)
   const classes = FormStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-
+  // Local State
+  const {value: email, bind: bindEmail, reset: resetEmail} = useInput('');
+  const {value: password, bind: bindPassword, reset: resetPassword} = useInput('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  // Store
+  const isLogged = useSelector((state) => state.auth.logged)
+  
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
     dispatch(login({email, password})).then(() => {
       if(isLogged){
-        history.push('/');
         setIsLoading(false);
         resetEmail();
         resetPassword();
+        history.push('/');
       }
-    })
+    }).catch(() => {
+      setError(true); 
+      setTimeout(() => setError(false), 3000); 
+      setIsLoading(false)})
   }
 
   return (
@@ -76,7 +82,8 @@ const Login = () => {
           >
             Sign In
           </Button>
-          {isLoading ?  <LinearProgress /> : null}
+          {isLoading ?  <><LinearProgress /><br/></> : null}
+          {error &&  <Alert severity="error">Email or Password incorrect</Alert>}
           <Grid container>
             <Grid item>
               <Link to='/register' className={classes.linkDeco}>

@@ -1,4 +1,4 @@
-// custom hook para los forms
+// custom hook for text inputs
 import { useState } from "react";
 
 export const useInput = (initialValue) => {
