@@ -35,7 +35,7 @@ export const ToolStyles = makeStyles((theme) => ({
 export const MainStyles = makeStyles({
   root: {
     minWidth: 250,
-    minHeight: 250,
+    minHeight: 200,
     margin: "auto 10px auto 10px",
   },
   linkDeco: {

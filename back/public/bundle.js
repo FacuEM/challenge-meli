@@ -88498,7 +88498,7 @@ var ToolStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["m
 var MainStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
   root: {
     minWidth: 250,
-    minHeight: 250,
+    minHeight: 200,
     margin: "auto 10px auto 10px"
   },
   linkDeco: {
@@ -89655,7 +89655,8 @@ var Main = function Main() {
       xs: 12,
       sm: 6,
       md: 4,
-      lg: 2
+      lg: 4,
+      xl: 2
     }, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Card"], {
       className: classes.root,
       key: t.id
