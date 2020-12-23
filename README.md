@@ -16,12 +16,12 @@ npm install
 npm start
 ```
 ## Tecnologías utilizadas:
-*Database: Sqlite3
-*ORM: Sequelize
-*Back-end:
-..*Node.js
-..*Express.js
-*Front-end;
-..*React.js
-..*React-redux
-*Styles: Material UI
++Database: Sqlite3
++ORM: Sequelize
++Back-end:
+..+Node.js
+..+Express.js
++Front-end;
+..+React.js
+..+React-redux
++Styles: Material UI
