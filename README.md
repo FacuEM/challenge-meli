@@ -88,4 +88,13 @@ back
 ---
 
 ## Demo:
-[![Demo Challenge](https://img.youtube.com/vi/H5K-9igur-E/hqdefault.jpg)](https://youtu.be/H5K-9igur-E)
+
+[![Demo Challenge](https://img.youtube.com/vi/H5K-9igur-E/maxresdefault.jpg)](https://youtu.be/H5K-9igur-E)
+
+Nota: Features que no aparecen en el video
+
+> User deslogeado puede ver las herramientas, features y bugs pero no puede votar prioridad ni crear ninguna herramienta, feature o bug.
+
+> Validación al logearse y al crear una nueva herramienta (nombre único).
+
+> Bug del video solucionado: En la vista principal se mostraba como activo un feature y bug que no lo estaban.

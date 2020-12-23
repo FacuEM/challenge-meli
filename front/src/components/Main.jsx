@@ -36,10 +36,10 @@ const Main = () => {
             {t.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Working on feature: {t.Features && t.Features.length > 0 ? t.Features[0].title : '-'}
+            Working on feature: {t.Features && t.Features.filter(f => f.active).length > 0 ? t.Features.filter(f => f.active)[0].title : '-'}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Working on bug: {t.Bugs && t.Bugs.length > 0 ? t.Bugs[0].title : '-'}
+            Working on bug: {t.Bugs && t.Bugs.filter(b => b.active).length > 0 ? t.Bugs.filter(b => b.active)[0].title : '-'}
           </Typography>
         </CardContent>
       </CardActionArea>

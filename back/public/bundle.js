@@ -89674,11 +89674,19 @@ var Main = function Main() {
       variant: "body2",
       color: "textSecondary",
       component: "p"
-    }, "Working on feature: ", t.Features && t.Features.length > 0 ? t.Features[0].title : '-'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Typography"], {
+    }, "Working on feature: ", t.Features && t.Features.filter(function (f) {
+      return f.active;
+    }).length > 0 ? t.Features.filter(function (f) {
+      return f.active;
+    })[0].title : '-'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Typography"], {
       variant: "body2",
       color: "textSecondary",
       component: "p"
-    }, "Working on bug: ", t.Bugs && t.Bugs.length > 0 ? t.Bugs[0].title : '-'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["CardActions"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    }, "Working on bug: ", t.Bugs && t.Bugs.filter(function (b) {
+      return b.active;
+    }).length > 0 ? t.Bugs.filter(function (b) {
+      return b.active;
+    })[0].title : '-'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["CardActions"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
       to: "/tool/".concat(t.id),
       className: classes.linkDeco
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
