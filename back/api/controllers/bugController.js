@@ -32,7 +32,7 @@ const bugController = {
   //bug completed
   completeBug(req, res) {
     Bug.update(
-      { completed: true },
+      { completed: true, active: false },
       {
         where: {
           id: req.params.id,

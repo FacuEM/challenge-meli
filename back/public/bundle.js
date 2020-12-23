@@ -88827,6 +88827,9 @@ var BugCell = function BugCell() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
       variant: "outlined",
       color: "primary",
+      disabled: bugs.filter(function (b) {
+        return b.active;
+      }).length > 0,
       onClick: function onClick() {
         return dispatch(Object(_redux_actions_bugs__WEBPACK_IMPORTED_MODULE_4__["activeBug"])(b.id, b.ToolId));
       }
@@ -89257,6 +89260,9 @@ var FeatureCell = function FeatureCell() {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["Button"], {
       variant: "outlined",
       color: "primary",
+      disabled: features.filter(function (f) {
+        return f.active;
+      }).length > 0,
       onClick: function onClick() {
         return dispatch(Object(_redux_actions_features__WEBPACK_IMPORTED_MODULE_4__["activeFeature"])(f.id, f.ToolId));
       }

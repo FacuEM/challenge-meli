@@ -54,7 +54,9 @@ const BugCell = () => {
 
               {tool.UserId === isLogged.id ? (!b.active && !b.completed) ? 
                 <TableCell align="left">
-                  <Button variant="outlined" color="primary" onClick={() => dispatch(activeBug(b.id, b.ToolId))}>Start Now</Button>
+                  <Button variant="outlined" color="primary"  
+                  disabled={bugs.filter(b => b.active).length > 0}
+                  onClick={() => dispatch(activeBug(b.id, b.ToolId))}>Start Now</Button>
                 </TableCell> : <p>Active right now or completed  </p> : null}
 
             </TableRow>

@@ -32,7 +32,7 @@ const featureController = {
   //feature completed
   completeFeature(req, res) {
     Feature.update(
-      { completed: true },
+      { completed: true, active: false },
       {
         where: {
           id: req.params.id,

@@ -55,7 +55,9 @@ const FeatureCell = () => {
               </TableCell>
 
              {tool.UserId === isLogged.id ? (!f.active && !f.completed) ? <TableCell align="left">
-               <Button variant="outlined" color="primary" onClick={() => dispatch(activeFeature(f.id, f.ToolId))}>Start Now</Button></TableCell> : <p>Active right now or completed  </p> : null} 
+               <Button variant="outlined" color="primary" disabled={features.filter(f => f.active).length > 0}
+               onClick={() => dispatch(activeFeature(f.id, f.ToolId))}>
+                 Start Now</Button></TableCell> : <p>Active right now or completed  </p> : null} 
 
               </TableRow>
           ))}
