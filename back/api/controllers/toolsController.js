@@ -16,7 +16,6 @@ const toolsController = {
   },
   //add new tool
   addTool(req, res) {
-    console.log(req.body);
     Tool.create(req.body)
       .then((tool) => tool.setUser(req.user))
       .then((tool) => res.send(tool))

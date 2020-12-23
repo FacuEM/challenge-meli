@@ -88496,7 +88496,8 @@ var ToolStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["m
 });
 var MainStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
   root: {
-    maxWidth: 345,
+    minWidth: 250,
+    minHeight: 200,
     margin: "auto 10px auto 10px"
   },
   linkDeco: {
@@ -89653,7 +89654,8 @@ var Main = function Main() {
       xs: 12,
       sm: 6,
       md: 4,
-      lg: 2
+      lg: 4,
+      xl: 2
     }, "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Card"], {
       className: classes.root,
       key: t.id
@@ -90292,16 +90294,14 @@ var ToolForm = function ToolForm() {
     name: "title",
     autoComplete: "title",
     autoFocus: true
-  }, bindTitle)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["TextField"], _extends({
-    variant: "outlined",
-    margin: "normal",
-    fullWidth: true,
-    name: "image",
-    label: "image",
-    type: "text",
-    id: "image",
-    autoComplete: "image"
-  }, bindImage)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+  }, bindTitle)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+    variant: "contained",
+    component: "label"
+  }, "Upload File", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file",
+    hidden: true,
+    name: "image"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["Button"], {
     type: "submit",
     fullWidth: true,
     variant: "contained",
@@ -90313,6 +90313,19 @@ var ToolForm = function ToolForm() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ToolForm);
+/*
+<TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="image"
+            label="image"
+            type="text"
+            id="image"
+            autoComplete="image"
+            {...bindImage}
+          />
+          */
 
 /***/ }),
 

@@ -53,17 +53,17 @@ const ToolForm = () => {
             autoFocus
             {...bindTitle}
           />
-             <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            name="image"
-            label="image"
-            type="text"
-            id="image"
-            autoComplete="image"
-            {...bindImage}
-          />
+             <Button
+  variant="contained"
+  component="label"
+>
+  Upload File
+  <input
+    type="file"
+    hidden
+    name='image'
+  />
+</Button>
           <Button
             type="submit"
             fullWidth
@@ -83,3 +83,17 @@ const ToolForm = () => {
 
 export default ToolForm
 
+
+/*
+<TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="image"
+            label="image"
+            type="text"
+            id="image"
+            autoComplete="image"
+            {...bindImage}
+          />
+          */

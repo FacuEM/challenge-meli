@@ -22,7 +22,7 @@ const Main = () => {
       <Grid container spacing={2}>
         
       {tools && 
-      tools.map((t) => <Grid item xs={12} sm={6} md={4} lg={2}>  <Card className={classes.root} key={t.id}>
+      tools.map((t) => <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>  <Card className={classes.root} key={t.id}>
       <CardActionArea>
         <CardMedia
           component="img"
