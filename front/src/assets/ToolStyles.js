@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const ToolStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    margin: '10px auto 10px'
   },
   details: {
     display: "flex",
@@ -33,7 +34,8 @@ export const ToolStyles = makeStyles((theme) => ({
 
 export const MainStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    minWidth: 250,
+    minHeight: 250,
     margin: "auto 10px auto 10px",
   },
   linkDeco: {

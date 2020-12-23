@@ -88465,7 +88465,8 @@ __webpack_require__.r(__webpack_exports__);
 var ToolStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])(function (theme) {
   return {
     root: {
-      display: "flex"
+      display: "flex",
+      margin: '10px auto 10px'
     },
     details: {
       display: "flex",
@@ -88496,7 +88497,8 @@ var ToolStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["m
 });
 var MainStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["makeStyles"])({
   root: {
-    maxWidth: 345,
+    minWidth: 250,
+    minHeight: 250,
     margin: "auto 10px auto 10px"
   },
   linkDeco: {
